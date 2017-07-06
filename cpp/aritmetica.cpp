@@ -1,20 +1,16 @@
-#ifndef _ARITMETICA_H
-#define _ARITMETICA_H
-
 /* Aritmetica Básica
     (+, -, ×, ÷)
 & Constantes
     - Pi
     - e
 */
+#include "../include/aritmetica.hpp"
 
-type suma(type a, type b) {return a+b;} 
+num_t suma(num_t a, num_t b) {return a+b;}
 
-type resta(type a, type b) {return a-b;}
+num_t resta(num_t a, num_t b) {return a-b;}
 
-type producto(type a, type b) {return a*b;} 
+num_t producto(num_t a, num_t b) {return a*b;}
 
 // PRECONDICION: b != 0
-type division_exacta(type a, type b) {return a/b;}
-
-#endif
+num_t division_exacta(num_t a, num_t b) {return a/b;}

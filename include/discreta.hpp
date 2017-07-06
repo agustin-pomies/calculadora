@@ -1,21 +1,73 @@
 #ifndef _DISCRETA_H
 #define _DISCRETA_H
 
-/* Mat. Discreta
-    - Algoritmo de Euclides
-    - MCD y mcm
-    - División entera y módulo
-    - Cantidad de divisores
-    - Descomposición factorial
-    - Coef. de Bezout
-    - phi(n)
-*/
+typedef int num_t;
+typedef char *string;
 
-type division_entera(type a, type b);
+// BASES NUMERICAS
+num_t base(num_t n, num_t base);
 
-type modulo(type a, type b);
+// DIVISIBILIDAD
+num_t division_entera(num_t a, num_t b);
 
-// guardar factores y exponentes en una lista?
-void desc_factorial(type a);
+num_t modulo(num_t a, num_t b);
+
+num_t gcd(num_t a, num_t b, bool extended);
+
+num_t mcm(num_t a, num_t b);
+
+num_t phi(num_t n);
+
+void divisores_de(num_t n);
+
+num_t cant_divisores(num_t n);
+
+bool es_primo(num_t n);
+
+bool es_anti_primo(num_t n);
+
+// CRIPTOGRAFIA
+void encriptar_Cesar(string s, num_t e);
+
+void encriptar_Vigenere(string s, string clave);
+
+void encriptar_RSA(string s, num_t e);
+
+void encriptar_ElGamal(string s, num_t e);
+
+void encriptar_Eliptic_Curves(string s, num_t e);
+
+// void encriptar_Cesar_polenta(string s, num_t e);
+
+void desencriptar_Cesar(string s, num_t d);
+
+void desencriptar_Vigenere(string s, string clave);
+
+void desencriptar_RSA(string s, num_t d);
+
+void desencriptar_ElGamal(string s, num_t d);
+
+void desencriptar_Eliptic_Curves(string s, num_t d);
+
+// void encriptar_Cesar_polenta(string s, num_t e);
+
+num_t Diffie_Hellman(num_t g, num_t n, num_t m);
+
+// CONTABILIDAD
+num_t arreglos(num_t n, num_t p);
+
+num_t comb(num_t n, num_t p);
+
+num_t factorial(num_t n);
+
+num_t Stirling_1();
+
+num_t Stirling_2();
+
+// CONGRUENCIAS
+void inv_modular(num_t a, num_t mod);
+
+// GRAFOS
+
 
 #endif
