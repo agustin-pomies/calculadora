@@ -13,18 +13,6 @@ Raiz cuadrada de negativo - Imagine / John Lennon
 0.07 - James Bond Theme
 
 FUNCIONALIDADES
-& Aritmetica Básica
-    (+, -, ×, ÷)
-& Constantes
-    - Pi
-    - e
-& Mat. Discreta
-    - Algoritmo de Euclides
-    - MCD y mcm
-    - División entera y módulo
-    - Descomposición factorial
-    - Coef. de Bezout
-    - phi(n)
 & Álgebra Lineal
     - Matrices y determinantes
 & Cálculo

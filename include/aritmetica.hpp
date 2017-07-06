@@ -1,6 +1,13 @@
 #ifndef _ARITMETICA_H
 #define _ARITMETICA_H
 
+/* Aritmetica Básica
+    (+, -, ×, ÷)
+& Constantes
+    - Pi
+    - e
+*/
+
 type suma(type a; type b)
     return a+b; 
 
