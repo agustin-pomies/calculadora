@@ -8,13 +8,13 @@
     - e
 */
 
-type suma(type a; type b);
+type suma(type a, type b);
 
-type resta(type a; type b);
+type resta(type a, type b);
 
-type producto(type a; type b);
+type producto(type a, type b);
 
 // PRECONDICION: b != 0
-type division_exacta(type a; type b);
+type division_exacta(type a, type b);
 
 #endif

@@ -10,13 +10,24 @@
     - Coef. de Bezout
     - phi(n)
 */
+struct rep_list {
+    type factor;
+    type exponente;
+    rep_list* sig;
+};
 
-type division_entera(type a; type b) {return (type)(a/b)} 
+typedef rep_list* list;
 
-type modulo(type a; type b) {return a%b}
+void insertar_en_lista(type a, list &l) {
+
+}
+
+type division_entera(type a, type b) {return (type)(a/b)} 
+
+type modulo(type a, type b) {return a%b}
 
 // guardar factores y exponentes en una lista?
-void desc_factorial(type a) {
+list desc_factorial(type a) {
     type raiz = sqrt(a);
     type d = 2;
     while(a != 1 && d <= raiz) {

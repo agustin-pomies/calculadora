@@ -8,13 +8,13 @@
     - e
 */
 
-type suma(type a; type b) {return a+b} 
+type suma(type a, type b) {return a+b} 
 
-type resta(type a; type b) {return a-b}
+type resta(type a, type b) {return a-b}
 
-type producto(type a; type b) {return a*b} 
+type producto(type a, type b) {return a*b} 
 
 // PRECONDICION: b != 0
-type division_exacta(type a; type b) {return a/b}
+type division_exacta(type a, type b) {return a/b}
 
 #endif

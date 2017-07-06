@@ -11,9 +11,9 @@
     - phi(n)
 */
 
-type division_entera(type a; type b);
+type division_entera(type a, type b);
 
-type modulo(type a; type b);
+type modulo(type a, type b);
 
 // guardar factores y exponentes en una lista?
 void desc_factorial(type a);
