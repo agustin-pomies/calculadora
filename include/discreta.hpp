@@ -2,7 +2,6 @@
 #define _DISCRETA_H
 
 typedef int num_t;
-typedef char *string;
 
 // BASES NUMERICAS
 num_t base(num_t n, num_t base);
@@ -27,6 +26,8 @@ bool es_primo(num_t n);
 bool es_anti_primo(num_t n);
 
 // CRIPTOGRAFIA
+num_t letra_a_numero(char c);
+
 void encriptar_Cesar(string s, num_t e);
 
 void encriptar_Vigenere(string s, string clave);
@@ -38,6 +39,8 @@ void encriptar_ElGamal(string s, num_t e);
 void encriptar_Eliptic_Curves(string s, num_t e);
 
 // void encriptar_Cesar_polenta(string s, num_t e);
+
+char numero_a_letra(num_t num);
 
 void desencriptar_Cesar(string s, num_t d);
 
@@ -66,8 +69,5 @@ num_t Stirling_2();
 
 // CONGRUENCIAS
 void inv_modular(num_t a, num_t mod);
-
-// GRAFOS
-
 
 #endif
