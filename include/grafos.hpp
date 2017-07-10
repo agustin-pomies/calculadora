@@ -10,13 +10,17 @@
 //      & Ingresando la matriz de incidencia [Matriz de adyacencia]
 //      & Ingresando por listas de vecinos [Lista de adyacencia]
 
-typedef int num_t;
-typedef int *grafo;
-typedef int *vertice;
+struct rep_nodo_vecino;
+struct rep_vertice;
+struct rep_grafo;
 
-// Sea n la cantidad de vertices, crea una matriz de n*n
-// Precondicion: n > 0
-grafo crear_grafo(num_t n);
+typedef int num_t;
+typedef rep_grafo *grafo;
+typedef rep_vertice *vertice;
+typedef rep_nodo_vecino *lista_vecinos;
+
+// Crea un grafo vacio
+grafo crear_grafo();
 
 // Remueve del grafo el vertice a
 // Si ya estaba ese vertice no hace nada
@@ -24,7 +28,7 @@ void agregar_vertice(grafo &G, vertice a);
 
 // Remueve del grafo el vertice a y sus aristas
 // Si no estaba ese vertice no hace nada
-void remover_arista(grafo &G, vertice a);
+void remover_vertice(grafo &G, vertice a);
 
 // Agrega al grafo la arista entre a y b
 // Si la arista ya existia no hace nada
