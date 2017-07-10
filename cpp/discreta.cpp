@@ -116,17 +116,19 @@ void desencriptar_Eliptic_Curves(string s, num_t d);
 num_t Diffie_Hellman(num_t g, num_t n, num_t m);
 
 // CONTABILIDAD
-num_t arreglos(num_t n, num_t p) {
-    // ARREGLAR LOS CASOS DONDE P ES MAYOR A N
-    num_t res;
-    res = factorial(n)/factorial(n-p);
+num_t arreglos(num_t n, num_t k) {
+    num_t res = 1;
+    // res = factorial(n)/factorial(n-p);
+    for(int i = n-k+1; i <= n; i++)
+        res = res*i;
     return res;        
 }
 
-num_t comb(num_t n, num_t p) {
-    // ARREGLAR LOS CASOS DONDE P ES MAYOR A N
-    num_t res;
-    res = factorial(n)/(factorial(p)*factorial(n-p));
+num_t comb(num_t n, num_t k) {
+    num_t res = 1;
+    // res = factorial(n)/(factorial(k)*factorial(n-k));
+    for(int i = 1; i <= k; i++)
+        res = res*(n-k+i)/i;
     return res;
 }
 
@@ -143,5 +145,3 @@ num_t Stirling_2();
 
 // CONGRUENCIAS
 void inv_modular(num_t a, num_t mod);
-
-// GRAFOS
