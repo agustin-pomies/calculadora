@@ -10,8 +10,7 @@
 //      & Ingresando por listas de vecinos [Lista de adyacencia]
 
 struct rep_nodo_vecino {
-    char nom_vecino;
-    lista_vecinos sig_ady;
+    vertice ady;
     lista_vecinos sig_vecino;
 };
 
@@ -48,7 +47,7 @@ bool es_vertice(grafo G, char v) {
             aux = aux->sig_ver;
         if(aux->nombre == v)
             res = true;
-    };
+    }
     return res;
 }
 
@@ -56,18 +55,38 @@ bool es_vertice(grafo G, char v) {
 // Si ya estaba ese vertice no hace nada
 void agregar_vertice(grafo &G, char v) {
     if(!es_vertice(G, v)) {
-        vertice = 
-    };
+        vertice nuevo = new rep_vertice;
+        nuevo->nombre = v;
+        nuevo->vecinos = NULL;
+        nuevo->sig_ver = G->info;
+        G->info = nuevo;
+        G->cant_vertices++;
+    }
 }
 
 // Remueve del grafo el vertice a y sus aristas
 // Si no estaba ese vertice no hace nada
 void remover_vertice(grafo &G, char v);
 
+// Devuelve true si entre a y b hay una arista que los une, false en caso contrario
+bool son_adyacentes(char a, char b);
+
 // Agrega al grafo la arista entre a y b
 // Si la arista ya existia no hace nada
-// Precondicion: es_vertice(a) & es_vertice(b)
-void agregar_arista(grafo &G, vertice a, vertice b);
+// Precondicion: es_vertice(a) & es_vertice(b), a != b
+void agregar_arista(grafo &G, char a, char b) {
+    if(!son_adyacentes(a, b)) {
+        vertice v1 = G->info;
+        vertice v2 = G->info;
+        while(v1->nombre != a || v2->nombre != b) {
+            if(v1->nombre != a)
+                v1 = v1->sig_ver;
+            if(v2->nombre != b)
+                v2 = v2->sig_ver;
+        }
+        
+    }
+}
 
 // Remueve del grafo la arista entre a y b
 // Si no habia arista no hace nada
@@ -95,8 +114,6 @@ num_t diametro(grafo G);
 // Precondicion: n > 0, es_vertice(a), es_vertice(b)
 num_t nro_caminos(grafo G, vertice a, vertice b, num_t n);
 
-// Devuelve true si entre a y b hay una arista que los une, false en caso contrario
-bool son_adyacentes(vertice a, vertice b);
 
 // Devuelve true si G es completo, false en caso contrario
 bool es_completo(grafo G);
