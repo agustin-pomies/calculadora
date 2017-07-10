@@ -120,17 +120,17 @@ num_t Diffie_Hellman(num_t p, num_t g, num_t n, num_t m);
 // COMBINATORIA
 
 // rep = true
-// Devuelve los arreglos con repeticion de n en p
-// Precondicion: n >= 0, p >= 0, p <= n
+// Devuelve los arreglos con repeticion de n en k
+// Precondicion: n >= 0, k >= 0, k <= n
 // AYUDA: 
-// formula A(n, p) = p^n
+// formula A(n, k) = k^n
 
 // rep = false
-// Devuelve los arreglos sin repeticion de n en p
-// Precondicion: n >= 0, p >= 0, p <= n
+// Devuelve los arreglos sin repeticion de n en k
+// Precondicion: n >= 0, k >= 0, k <= n
 // AYUDA: 
 // A(n, 0) = 1
-num_t arreglos(num_t n, num_t p, bool rep);
+num_t arreglos(num_t n, num_t k, bool rep);
 
 // rep = true
 // Devuelve las combinaciones con repeticion de n en p
@@ -138,12 +138,12 @@ num_t arreglos(num_t n, num_t p, bool rep);
 // AYUDA: formula C(n+k-1, k)
 
 // rep = false
-// Devuelve las combinaciones sin repeticion de n en p
-// Precondicion: n >= 0, p >= 0, k <= n
+// Devuelve las combinaciones sin repeticion de n en k
+// Precondicion: n >= 0, k >= 0, k <= n
 // AYUDA: 
 // C(n,0) = 1, 
 // C(n, k) = C(n, n-k), 
-num_t comb(num_t n, num_t p, bool rep);
+num_t comb(num_t n, num_t k, bool rep);
 
 // Devuelve el factorial de un numero
 // Precondicion: n >= 0
