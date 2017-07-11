@@ -1,4 +1,5 @@
 #include "../include/grafos.hpp"
+#include "../include/tabla.hpp"
 
 // GRAFOS
 // Metodo para ingresar grafos:
@@ -8,8 +9,10 @@
 
 struct rep_grafo {
     bool info[MAX_VER][MAX_VER];
+    tabla etiquetas;
     num_t cant_vertices;
     num_t cant_aristas;
+    num_t MAX_VER;
 };
 
 // Crea una matriz de tamanio maximo determinado por MAX_VER
@@ -17,39 +20,74 @@ grafo crear_grafo() {
     grafo G = new rep_grafo;
     G->cant_vertices = 0;
     G->cant_aristas = 0;
+    G->MAX_VER = MAX_VER;
     for(int i = 0; i <= MAX_VER; i++)
         for(int j = 0; j <= MAX_VER; j++)
             G->info[i][j] = false;
+    G->etiquetas = crear_tabla(MAX_VER);
     return G;
 }
 
-// Remueve del grafo el vertice a
-// Si ya estaba ese vertice no hace nada
-void agregar_vertice(grafo &G, vertice a);
+// Agrega al grafo un vertice
+void agregar_vertice(grafo &G, char c) {
+    if(G->cant_vertices != MAX_VER) {
+        insertar_en_tabla(c, G->cant_vertices, G->etiquetas)
+        G->cant_vertices++;
+    }
+}
 
-// Remueve del grafo el vertice a y sus aristas
-// Si no estaba ese vertice no hace nada
-void remover_arista(grafo &G, vertice a);
+// Remueve del grafo el vertice y sus aristas
+void remover_vertice(grafo &G, char c) {
+    if(!es_grafo_vacio(G)) {
+        int indice = valor_en_tabla(c, G->etiquetas);
+        for(int i = 0; i <= indice; i++) {
+            G->info[indice][i] = false;
+            G->info[i][indice] = false;
+        };
+        G->cant_vertices--;
+        eliminar_de_tabla(c, G->etiquetas);
+    };
+}
 
 // Agrega al grafo la arista entre a y b
 // Si la arista ya existia no hace nada
 // Precondicion: es_vertice(a) & es_vertice(b)
-void agregar_arista(grafo &G, vertice a, vertice b);
+void agregar_arista(grafo &G, char a, char b) {
+    int valor_a = valor_en_tabla(a, G->etiquetas);
+    int valor_b = valor_en_tabla(b, G->etiquetas);
+    G->info[a][b] = true;
+    G->info[b][a] = true;
+    G->cant_aristas++;
+}
 
 // Remueve del grafo la arista entre a y b
 // Si no habia arista no hace nada
 // Precondicion: es_vertice(a) & es_vertice(b)
-void remover_arista(grafo &G, vertice a, vertice b);
+void remover_arista(grafo &G, char a, char b) {
+    int valor_a = valor_en_tabla(a, G->etiquetas);
+    int valor_b = valor_en_tabla(b, G->etiquetas);
+    G->info[a][b] = false;
+    G->info[b][a] = false;
+    G->cant_aristas--;
+}
 
 // Devuelve el nro de vertices de G
-num_t nro_vertices(grafo G);
+num_t nro_vertices(grafo G) { return G->cant_vertices; }
 
 // Devuelve el nro de aristas de G
-num_t nro_aristas(grafo G);
+num_t nro_aristas(grafo G) { return G->cant_aristas; }
 
 // Devuelve el grado del vertice v en el grafo G
 // Precondicion: es_vertice(v)
-num_t grado(grafo G, vertice v);
+num_t grado(grafo G, char v) {
+    int valor_v = valor_en_tabla(v, G->etiquetas);
+    int grado = 0;
+    for(int i = 0; i < G->cant_vertices; i++) {
+        if(G->info[valor_v][i])
+            grado++;
+    };
+    return grado;
+}
 
 // Devuelve la distancia entre los vertices a y b
 // Precondicion: es_vertice(a) & es_vertice(b)
@@ -63,7 +101,7 @@ num_t diametro(grafo G);
 num_t nro_caminos(grafo G, vertice a, vertice b, num_t n);
 
 // Devuelve true si v es vertice de G, false en caso contrario
-bool es_vertice(grafo G, vertice v);
+bool es_vertice(grafo G, char v) { return valor_en_tabla(v, G->etiquetas) >= 0; }
 
 // Devuelve true si entre a y b hay una arista que los une, false en caso contrario
 bool son_adyacentes(vertice a, vertice b);

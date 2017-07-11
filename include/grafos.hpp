@@ -65,7 +65,7 @@ bool es_vertice(grafo G, vertice v);
 bool son_adyacentes(vertice a, vertice b);
 
 // Devuelve true si G esta vacio false en caso contrario
-bool es_vacio(grafo G);
+bool es_grafo_vacio(grafo G);
 
 // Devuelve true si G es completo, false en caso contrario
 bool es_completo(grafo G);
