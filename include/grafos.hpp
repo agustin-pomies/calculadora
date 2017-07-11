@@ -10,13 +10,14 @@
 //      & Ingresando la matriz de incidencia [Matriz de adyacencia]
 //      & Ingresando por listas de vecinos [Lista de adyacencia]
 
-typedef int num_t;
-typedef int *grafo;
-typedef int *vertice;
+struct rep_grafo;
 
-// Sea n la cantidad de vertices, crea una matriz de n*n
-// Precondicion: n > 0
-grafo crear_grafo(num_t n);
+typedef int num_t;
+typedef rep_grafo *grafo;
+const int MAX_VER = 10;
+
+// Crea una matriz de tamanio maximo determinado por MAX_VER
+grafo crear_grafo();
 
 // Remueve del grafo el vertice a
 // Si ya estaba ese vertice no hace nada
