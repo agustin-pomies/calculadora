@@ -6,7 +6,7 @@
 // GRAFOS
 // Metodo para ingresar grafos:
 //      & Ingresando el nro de vertices y las aristas del grafo (ad, bc, ...) [Lista de incidencia]
-//      & Ingresando la matriz de incidencia [Matriz de adyacencia]
+//      & Ingresando la matriz de adyacencia [Matriz de adyacencia]
 //      & Ingresando por listas de vecinos [Lista de adyacencia]
 
 struct rep_nodo_vecino {
@@ -69,13 +69,30 @@ void agregar_vertice(grafo &G, char v) {
 void remover_vertice(grafo &G, char v);
 
 // Devuelve true si entre a y b hay una arista que los une, false en caso contrario
-bool son_adyacentes(char a, char b);
+// Precondicion: a != b, es_vertice(a) & es_vertice(b)
+bool son_adyacentes(grafo G, char a, char b) {
+    bool res = false;
+    vertice aux = G->info;
+    char etiqueta;
+    while(aux->nombre != a && aux->nombre != b)
+        aux = aux->sig_ver;
+    if(aux->nombre == a)
+        etiqueta = b;
+    else
+        etiqueta = a;
+    lista_vecinos l = aux->vecinos;
+    while(l != NULL && l->ady->nombre != etiqueta)
+        l = l->sig_vecino;
+    if(l != NULL)
+        res = true;
+    return res;
+}
 
 // Agrega al grafo la arista entre a y b
 // Si la arista ya existia no hace nada
 // Precondicion: es_vertice(a) & es_vertice(b), a != b
 void agregar_arista(grafo &G, char a, char b) {
-    if(!son_adyacentes(a, b)) {
+    if(!son_adyacentes(G, a, b)) {
         vertice v1 = G->info;
         vertice v2 = G->info;
         while(v1->nombre != a || v2->nombre != b) {
@@ -84,24 +101,58 @@ void agregar_arista(grafo &G, char a, char b) {
             if(v2->nombre != b)
                 v2 = v2->sig_ver;
         }
-        
+        lista_vecinos nuevo1 = new rep_nodo_vecino;
+        nuevo1->ady = v2;
+        nuevo1->sig_vecino = v1->vecinos;
+        v1->vecinos = nuevo1;
+        lista_vecinos nuevo2 = new rep_nodo_vecino;
+        nuevo2->ady = v1;
+        nuevo2->sig_vecino = v2->vecinos;
+        v2->vecinos = nuevo2;
+        G->cant_aristas++;
     }
 }
 
 // Remueve del grafo la arista entre a y b
 // Si no habia arista no hace nada
 // Precondicion: es_vertice(a) & es_vertice(b)
-void remover_arista(grafo &G, vertice a, vertice b);
+void remover_arista(grafo &G, char a, char b) {
+    if(son_adyacentes(G, a, b)) {
+        vertice v = G->info;
+        char etiqueta;
+        while(v->nombre != a && v->nombre != b)
+            v = v->sig_ver;
+        if(v->nombre == a)
+        etiqueta = b;
+        else
+        etiqueta = a;
+        lista_vecinos l = v->vecinos;
+        // TODO: SEGUIR
+        while(l->sig_vecino->ady->nombre != )
+        G->cant_aristas--;
+    }
+}
 
 // Devuelve el nro de vertices de G
-num_t nro_vertices(grafo G);
+num_t nro_vertices(grafo G) { return G->cant_vertices; }
 
 // Devuelve el nro de aristas de G
-num_t nro_aristas(grafo G);
+num_t nro_aristas(grafo G) { return G->cant_aristas; }
 
 // Devuelve el grado del vertice v en el grafo G
 // Precondicion: es_vertice(v)
-num_t grado(grafo G, vertice v);
+num_t grado(grafo G, char v) {
+    vertice a = G->info;
+    while(a->nombre != v)
+        a = a->sig_ver;
+    lista_vecinos l = a->vecinos;
+    num_t n = 0;
+    while(l != NULL) {
+        n++;
+        l = l->sig_vecino;
+    };
+    return n;
+}
 
 // Devuelve la distancia entre los vertices a y b
 // Precondicion: es_vertice(a) & es_vertice(b)
@@ -114,9 +165,12 @@ num_t diametro(grafo G);
 // Precondicion: n > 0, es_vertice(a), es_vertice(b)
 num_t nro_caminos(grafo G, vertice a, vertice b, num_t n);
 
-
 // Devuelve true si G es completo, false en caso contrario
 bool es_completo(grafo G);
+
+// Devuelve un grafo completo de n vertices
+// Precondicion: n > 0
+grafo Kompleto(num_t n);
 
 // Devuelve una copia del grafo G
 grafo copiar_grafo(grafo G);
@@ -140,10 +194,22 @@ bool es_aciclico(grafo G);
 bool es_arbol(grafo G);
 
 // Devuelve true si el G tiene un recorrido euleriano, false en caso contrario
-bool existe_rec_euleriano(grafo G);
+bool existe_rec_euleriano(grafo G) {
+
+}
 
 // Devuelve true si el G tiene un circuito euleriano, false en caso contrario
-bool existe_circ_euleriano(grafo G);
+bool existe_circ_euleriano(grafo G) {
+    //TODO: FALTA SABER SI ES CONEXO
+    vertice aux = G->info;
+    char etiqueta;
+    bool res = true;
+    while(aux != NULL && res) {
+        etiqueta = aux->nombre;
+        res = res && grado(G, etiqueta) % 2 == 0;
+    }
+    return res;
+}
 
 // Devuelve true si el G tiene un camino hamiltoniano, false en caso contrario
 bool existe_cam_hamiltoniano(grafo G);
