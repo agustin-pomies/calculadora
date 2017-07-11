@@ -28,6 +28,22 @@ MODOS
 */
 
 int main() {
+    printf("<<< CALCULADORA PRO v1.0 >>>\n");
+    printf("Menu de Opciones:\n");
+    printf("1) Aritmetica\n");
+    printf("2) Mat. Discreta\n");
+    printf("3) Polinomios\n");
+    printf("4) Grafos\n");
+    printf("5) Calculo\n");
+    printf("6) Algebra Lineal\n");
+    printf("7) \n");
+    printf("8) \n");
+    printf("9) \n");
+    printf("0) Salir\n");
+
+    // leer el comando
+    char nom_comando[TXT_MAX_LNG];
+    scanf("%s", nom_comando);
 
     return 0;    
 }
