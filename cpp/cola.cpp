@@ -1,7 +1,8 @@
+#include "../include/cola.hpp"
 #include <stddef.h>
 
 struct rep_nodo {
-	vertice dato;
+	char dato;
 	rep_nodo* sig;
 };
 
@@ -16,7 +17,7 @@ cola crear_cola() {
 	return nuevo;
 }
 
-void encolar(vertice b, cola &c) {
+void encolar(char b, cola &c) {
 	rep_nodo* elem = new rep_nodo;
 	elem->dato = b;
 	elem->sig = NULL;
@@ -41,7 +42,7 @@ bool es_vacia_cola(cola c) {
 	return c->ppio == NULL;
 }
 
-vertice frente(cola c) {
+char frente(cola c) {
 	return c->ppio->dato;
 }
 
