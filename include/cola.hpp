@@ -6,11 +6,11 @@ typedef rep_cola *cola;
 
 /* Constructoras */
 
-/*  Devuelve una cola_binarios vacía (sin elementos). */
+/*  Devuelve una cola vacía (sin elementos). */
 cola crear_cola();
 
 /* Encola `a' en `c'. */
-void encolar(char a, cola &c);
+void encolar(int a, cola &c);
 
 /* Destructoras */
 
