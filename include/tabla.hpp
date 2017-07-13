@@ -1,5 +1,7 @@
+struct rep_nodo;
 struct rep_tabla;
 
+typedef rep_nodo *nodo;
 typedef rep_tabla *tabla;
 
 /*
@@ -15,6 +17,7 @@ tabla crear_tabla(int tamanio);
   Precondición: valor != INT_MAX.
   El tiempo de ejecución es O(1).
  */
+ // TODO: Si hay una asociacion, no la sobreescribe. No hace nada.
 void insertar_en_tabla(char clave, int valor, tabla &t);
 
 /*
