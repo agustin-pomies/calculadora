@@ -1,76 +1,50 @@
 #include "../include/tabla.hpp"
-
+#include "../include/lista.hpp"
+#include <stdlib.h>
 #include <limits.h>
 
-/* Hash abierto. */
-struct rep_nodo {
-	char c;
-	int indice;
-	nodo sig;
-};
-
 struct rep_tabla {
-  rep_nodo *elems;
+  nodo *elems;
   int tamanio;
 };
+
+int hash(char c, tabla t) { return (int)c % t->tamanio; } 
 
 tabla crear_tabla(int tamanio) {
 	tabla t = new rep_tabla;
 	t->tamanio = tamanio;
 	t->elems = new nodo [tamanio];
-	for(int i = 0; i < tamanio; i++) {
+	for(int i = 0; i < tamanio; i++)
 		t->elems[i] = NULL;
-	};
 	return t;
 }
 
-// TODO:
-// TODO:
-// TODO:
-// TODO:
-// TODO:
-
 void insertar_en_tabla(char clave, int valor, tabla &t) {
-	int n;
-	cadena cad = t->elems[hash_texto(clave, t->tamanio)];
-	if(numero_de_texto(clave, cad, n)) {
-		localizador loc = inicio_cadena(cad);
-		nodo a_borrar;
-		while(comparar_texto(clave, texto_info(info_cadena(loc, cad))) != igual || numero_info(info_cadena(loc, cad))!= n)
-			loc = siguiente(loc, cad);
-		a_borrar = info_cadena(loc, cad);
-		cambiar_en_cadena(i, loc, cad);
-		liberar_info(a_borrar);
-	}	else
-		insertar_despues(i, final_cadena(cad), cad);
+	int indice = hash(clave, t);
+	insertar_en_lista(clave, valor, t->elems[indice]);
 }
 
 void eliminar_de_tabla(char clave, tabla &t) {
-	cadena cad = t->elems[hash_texto(clave, t->tamanio)];
-	localizador loc = inicio_cadena(cad);
-	localizador aux = loc;
-	while(es_localizador_cadena(loc)) {
-		if(comparar_texto(texto_info(info_cadena(loc, cad)), clave) == igual) {
-			aux = loc;
-			loc = siguiente(loc, cad);
-			remover_de_cadena(aux, cad);
-		} else {
-			loc = siguiente(loc, cad);
-		};
-	};
+	int indice = hash(clave, t);
+	eliminar_de_tabla(clave, t->elems[indice]);
 }
 
 void liberar_tabla(tabla &t) {
 	for(int i = 0; i < t->tamanio; i++)
-		liberar_cadena(t->elems[i]);
-	delete [] t->elems;
+		liberar_lista(t->elems[i]);
+	delete t->elems;
 	delete t;
 }
 
 int valor_en_tabla(char clave, tabla t) {
-	cadena cad = t->elems[hash_texto(clave, t->tamanio)];
-	int n;
-	if(!numero_de_texto(clave, cad, n))
-		n = INT_MAX;
+	int indice = hash(clave, t);
+	int n = valor_en_lista(clave, t->elems[indice]);
 	return n;
+}
+
+tabla copiar_tabla(tabla t) {
+	tabla copia = crear_tabla(t->tamanio);
+		for(int i = 0; i < t->tamanio; i++)
+			copia->elems[i] = copiar_lista(t->elems[i]);
+	return copia;
 }

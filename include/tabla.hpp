@@ -1,23 +1,26 @@
+#ifndef _TABLA_H
+#define _TABLA_H
+
 struct rep_nodo;
 struct rep_tabla;
 
 typedef rep_nodo *nodo;
 typedef rep_tabla *tabla;
 
+// Devuelve el resultado de aplicar hashing al caracter c para la tabla t
+int hash(char c, tabla t);
+
 /*
- Crea una tabla de asociaciones texto->numero.
+ Crea una tabla de asociaciones char->numero.
  Podrá haber hasta `tamanio' asociaciones.
  */
 tabla crear_tabla(int tamanio);
 
 /*
   Inserta en `t' la asociación entre `clave' y `valor'.
-  Si ya existía una asociación para `clave' es reemplazada por la
-  nueva.
-  Precondición: valor != INT_MAX.
+  Si ya existía una asociación para `clave' no hace nada.
   El tiempo de ejecución es O(1).
  */
- // TODO: Si hay una asociacion, no la sobreescribe. No hace nada.
 void insertar_en_tabla(char clave, int valor, tabla &t);
 
 /*
@@ -33,8 +36,10 @@ void eliminar_de_tabla(char clave, tabla &t);
 void liberar_tabla(tabla &t);
 
 /*
-  Devuelve el valor correspondiente a la asociación de `clave' en `t', o INT_MAX
-  si no existe tal asociación.
+  Devuelve el valor correspondiente a la asociación de `clave' en `t'.
   El tiempo de ejecución es O(1) en promedio.
  */
 int valor_en_tabla(char clave, tabla t);
+
+// Devuelve una copia de la tabla t
+tabla copiar_tabla(tabla t);
