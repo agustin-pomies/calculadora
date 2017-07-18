@@ -20,9 +20,6 @@ grafo crear_grafo() {
     grafo G = new rep_grafo;
     G->cant_vertices = 0;
     G->cant_aristas = 0;
-    for(int i = 0; i <= MAX_VER; i++)
-        for(int j = 0; j <= MAX_VER; j++)
-            G->info[i][j] = false;
     G->etiquetas = crear_tabla(MAX_VER);
     return G;
 }
@@ -31,6 +28,10 @@ grafo crear_grafo() {
 void agregar_vertice(grafo &G, char c) {
     if(G->cant_vertices != MAX_VER) {
         insertar_en_tabla(c, G->cant_vertices, G->etiquetas);
+        for(int i = 0; i <= G->cant_vertices; i++) {
+            G->info[G->cant_vertices][i] = false;
+            G->info[i][G->cant_vertices] = false;
+        };
         G->cant_vertices++;
     }
 }
@@ -39,14 +40,25 @@ void agregar_vertice(grafo &G, char c) {
 void remover_vertice(grafo &G, char c) {
     if(!es_grafo_vacio(G)) {
         int indice = valor_en_tabla(c, G->etiquetas);
-        for(int i = 0; i <= indice; i++) {
-            G->info[indice][i] = false;
-            G->info[i][indice] = false;
-        };
-        // TODO:
+        
+        // desplazamiento vertical de columnas
+        for(int i = 0; i < indice; i++)
+            for(int j = indice; j < G->cant_vertices-1; j++)
+                G->info[i][j] = G->info[i][j+1];
+
+        // desplazamiento horizontal de filas
+        for(int i = indice; i < G->cant_vertices-1; i++)
+            for(int j = 0; j < indice; j++)
+                G->info[i][j] = G->info[i+1][j];
+
+        // desplazamiento diagonal
+        for(int i = indice; i < G->cant_vertices; i++)
+            for(int j = indice; j < G->cant_vertices; j++)
+                G->info[i][j] = G->info[i+1][j+1];
+
         G->cant_vertices--;
         eliminar_de_tabla(c, G->etiquetas);
-    };
+    }
 }
 
 // Agrega al grafo la arista entre a y b
@@ -96,8 +108,41 @@ num_t grado(grafo G, char v) {
 // Devuelve la distancia entre los vertices a y b
 // Precondicion: es_vertice(a) & es_vertice(b)
 num_t distancia(grafo G, char a, char b) {
-    // TODO:
-    // NOTA: Deep Searching no serviria, es mejor Breadth Searching
+    num_t dist, indice, valor_a, valor_b;
+    bool visita[G->cant_vertices];
+    bool res;
+    dist = 0;
+    valor_a = valor_en_tabla(a, G->etiquetas);
+    valor_b = valor_en_tabla(b, G->etiquetas);
+    cola c = crear_cola();
+    for(int i = 0; i < G->cant_vertices; i++)
+        visita[i] = false;
+    encolar(-1, c);
+    encolar(valor_a, c);
+    visita[valor_a] = true;
+
+    while(!es_vacia_cola(c) && !visita[valor_b]) {
+        indice = frente(c);
+        desencolar(c);
+        if(indice == -1 && !es_vacia_cola(c)) {
+            encolar(-1, c);
+            dist++;
+        } else {
+            for(int j = 0; j < G->cant_vertices; j++)
+                if(G->info[indice][j] && !visita[j]) {
+                    encolar(j, c);
+                    visita[j] = true; 
+                }
+        }
+    }
+    liberar_cola(c);
+    // REVISAR:
+    delete visita[];
+
+    if(visita[valor_b])
+        return dist;
+    else
+        return -1;
 }
 
 // Devuelve la mayor distancia entre dos vertices cualesquiera del grafo G
@@ -151,7 +196,12 @@ grafo copiar_grafo(grafo G) {
     grafo copia = new rep_grafo;
     copia->cant_vertices = G->cant_vertices;
     copia->cant_aristas = G->cant_aristas;
-    // TODO: copiar tabla y matriz
+    for(int i = 0; i < copia->cant_vertices; i++)
+        for(int j = i; j < copia->cant_vertices; j++) {
+            copia->info[i][j] = G->info[i][j];
+            copia->info[j][i] = copia->info[i][j];
+        }
+    copia->etiquetas = copiar_tabla(G->etiquetas);
     return copia;
 }
 
@@ -165,8 +215,7 @@ grafo complementario(grafo G) {
             C->info[i][j] = !G->info[i][j];
             C->info[j][i] = C->info[i][j];
         }
-    //C->etiquetas;
-    // TODO:
+    C->etiquetas = copiar_tabla(G->etiquetas);
     return C;
 }
 
@@ -179,17 +228,19 @@ bool es_conexo(grafo G) {
         int cont, indice;
         encolar(0, c);
         cont = 0;
+        visita[0] = true;
         for(int i = 1; i < G->cant_vertices; i++)
             visita[i] = false;
 
         while(!es_vacia_cola(c)) {
             indice = frente(c);
-            visita[indice] = true;
             desencolar(c);
             cont++;
             for(int j = 0; j < G->cant_vertices; j++)
-                if(G->info[indice][j] && !visita[j])
+                if(G->info[indice][j] && !visita[j]) {
                     encolar(j, c);
+                    visita[j] = true;
+                };
         }
         liberar_cola(c);
         // REVISAR:
@@ -208,7 +259,7 @@ num_t componentes_conexas(grafo G) {
         int cont, indice, n;
         cont = 0;
         n = 0;
-        for(int i = 1; i < G->cant_vertices; i++)
+        for(int i = 0; i < G->cant_vertices; i++)
             visita[i] = false;
         
         while(cont != G->cant_vertices) {
@@ -217,12 +268,13 @@ num_t componentes_conexas(grafo G) {
             encolar(n, c);
             while(!es_vacia_cola(c)) {
                 indice = frente(c);
-                visita[indice] = true;
                 desencolar(c);
                 cont++;
                 for(int j = 0; j < G->cant_vertices; j++)
-                    if(G->info[indice][j] && !visita[j])
+                    if(G->info[indice][j] && !visita[j]) {
                         encolar(j, c);
+                        visita[j] = true;
+                    };
             }
             comp++;
         }
@@ -236,9 +288,20 @@ num_t componentes_conexas(grafo G) {
 // Devuelve true si G es plano, false en caso contrario
 bool es_plano(grafo G) {
     bool res;
+    // Esta condicion se debe cumplir si n>=3
     res = G->cant_aristas <= 3*G->cant_vertices - 6;
+
+    // Si n > 3 y no existen ciclos de longitud 3
+    // G->cant_aristas < 2*G->cant_vertices - 4;
+
+    // K4 es plano, tiene 4 vertices y tiene 6 aristas
+
+    // K5 y K3,3 son grafos no planares minimales
+    // K5 tiene 5 vertices y 10 aristas (menor numero de vertices)
+    // K3,3 tiene 6 vertices y 9 aristas (menor numero de aristas)
+    // Si un grafo es no planar entonces |V| >= 5 y |E| >= 9
+
     // TODO:
-    // res = res && true;
     return res;
 }
 
@@ -253,7 +316,7 @@ bool es_arbol(grafo G) {
     res = G->cant_vertices == G->cant_aristas + 1;
     // NOTA: eligo el que tenga mejor tiempo de ejecucion
     res = res & es_conexo(G); // orden V^2 en el peor caso
-    res = res & es_aciclico(G);
+    // res = res & es_aciclico(G);
     return res;
 }
 
@@ -311,3 +374,4 @@ bool existe_cic_hamiltoniano(grafo G) {
 }
 
 // COLORACION
+// Si G es plano, se puede colorear con 4 colores

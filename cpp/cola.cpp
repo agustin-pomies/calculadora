@@ -2,7 +2,7 @@
 #include <stddef.h>
 
 struct rep_nodo {
-	char dato;
+	int dato;
 	rep_nodo* sig;
 };
 
@@ -17,7 +17,7 @@ cola crear_cola() {
 	return nuevo;
 }
 
-void encolar(char b, cola &c) {
+void encolar(int b, cola &c) {
 	rep_nodo* elem = new rep_nodo;
 	elem->dato = b;
 	elem->sig = NULL;
@@ -42,7 +42,7 @@ bool es_vacia_cola(cola c) {
 	return c->ppio == NULL;
 }
 
-char frente(cola c) {
+int frente(cola c) {
 	return c->ppio->dato;
 }
 

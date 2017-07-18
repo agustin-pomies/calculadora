@@ -35,6 +35,6 @@ bool es_vacia_cola(cola c);
   Devuelve el elemento que está en el frente de `c'.
   Precondición: ! es_vacia_cola(c);
  */
-char frente(cola c);
+int frente(cola c);
 
 #endif

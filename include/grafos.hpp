@@ -22,12 +22,12 @@ grafo crear_grafo();
 
 // Remueve del grafo el vertice a
 // Si ya estaba ese vertice no hace nada
-// Tiempo de Ejecucion: O(1)
+// Tiempo de Ejecucion: O(V)
 void agregar_vertice(grafo &G, char c);
 
 // Remueve del grafo el vertice y sus aristas
 // Si no estaba ese vertice no hace nada
-// Tiempo de Ejecucion: 
+// Tiempo de Ejecucion: O()
 void remover_vertice(grafo &G, char c);
 
 // Agrega al grafo la arista entre a y b
