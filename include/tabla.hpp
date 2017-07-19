@@ -43,3 +43,5 @@ int valor_en_tabla(char clave, tabla t);
 
 // Devuelve una copia de la tabla t
 tabla copiar_tabla(tabla t);
+
+#endif

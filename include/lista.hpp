@@ -28,3 +28,5 @@ int valor_en_lista(char clave, lista l);
 // Devuelve una copia de l
 // Tiempo de Ejecucion: O(n) siendo n el largo de la lista
 lista copiar_lista(lista l);
+
+#endif

@@ -1,8 +1,8 @@
 #ifndef _GRAFOS_H
 #define _GRAFOS_H
 
+#include "cola.hpp"
 //#include "matrices.hpp"
-//#include "cola.hpp"
 
 // GRAFOS
 // Metodo para ingresar grafos:
@@ -14,7 +14,7 @@ struct rep_grafo;
 
 typedef int num_t;
 typedef rep_grafo *grafo;
-const int MAX_VER = 20;
+const int MAX_VER = 10;
 
 // Crea una matriz de tamanio maximo determinado por MAX_VER
 // Tiempo de Ejecucion: O(MAX_VER^2)
@@ -62,12 +62,12 @@ num_t distancia(grafo G, char a, char b);
 
 // Devuelve la mayor distancia entre dos vertices cualesquiera del grafo G
 // Tiempo de Ejecucion: 
-num_t diametro(grafo G);
+// num_t diametro(grafo G);
 
 // Devuelve el nro de caminos de largo n que comienzan en a y terminan en b
 // Precondicion: n > 0, es_vertice(a), es_vertice(b)
 // Tiempo de Ejecucion: 
-num_t nro_caminos(grafo G, char a, char b, num_t n);
+// num_t nro_caminos(grafo G, char a, char b, num_t n);
 
 // Devuelve true si v es vertice de G, false en caso contrario
 // Tiempo de Ejecucion: O(1) en tiempo promedio
@@ -112,7 +112,7 @@ bool es_plano(grafo G);
 
 // Devuelve true si G es aciclico, false en caso contrario
 // Tiempo de Ejecucion: 
-bool es_aciclico(grafo G);
+// bool es_aciclico(grafo G);
 
 // Devuelve true si G es arbol, false en caso contrario
 // Tiempo de Ejecucion: 
@@ -130,11 +130,11 @@ bool existe_circ_euleriano(grafo G);
 
 // Devuelve true si el G tiene un camino hamiltoniano, false en caso contrario
 // Tiempo de Ejecucion: 
-bool existe_cam_hamiltoniano(grafo G);
+// bool existe_cam_hamiltoniano(grafo G);
 
 // Devuelve true si el G tiene un ciclo hamiltoniano, false en caso contrario
 // Tiempo de Ejecucion: 
-bool existe_cic_hamiltoniano(grafo G);
+// bool existe_cic_hamiltoniano(grafo G);
 
 // COLORACION
 

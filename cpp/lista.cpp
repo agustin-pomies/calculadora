@@ -50,9 +50,14 @@ void liberar_lista(lista &l) {
 // Tiempo de Ejecucion: O(n) siendo n el largo de la lista
 int valor_en_lista(char clave, lista l) {
     lista aux = l;
+    int n;
     while(aux != NULL && aux->c != clave)
         aux = aux->sig;
-    return aux->indice;
+    if(aux != NULL)
+        n = aux->indice;
+    else
+        n = -1;
+    return n;
 }
 
 // Devuelve una copia de l (la lista es copiada al reves)

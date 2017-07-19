@@ -110,7 +110,6 @@ num_t grado(grafo G, char v) {
 num_t distancia(grafo G, char a, char b) {
     num_t dist, indice, valor_a, valor_b;
     bool visita[G->cant_vertices];
-    bool res;
     dist = 0;
     valor_a = valor_en_tabla(a, G->etiquetas);
     valor_b = valor_en_tabla(b, G->etiquetas);
@@ -137,7 +136,7 @@ num_t distancia(grafo G, char a, char b) {
     }
     liberar_cola(c);
     // REVISAR:
-    delete visita[];
+    // delete visita[];
 
     if(visita[valor_b])
         return dist;
@@ -146,12 +145,15 @@ num_t distancia(grafo G, char a, char b) {
 }
 
 // Devuelve la mayor distancia entre dos vertices cualesquiera del grafo G
+/* 
 num_t diametro(grafo G) {
     // TODO:
 }
+*/
 
 // Devuelve el nro de caminos de largo n que comienzan en a y terminan en b
 // Precondicion: n > 0, es_vertice(a), es_vertice(b)
+/*
 num_t nro_caminos(grafo G, char a, char b, num_t n) {
     int valor_a = valor_en_tabla(a, G->etiquetas);
     int valor_b = valor_en_tabla(b, G->etiquetas);
@@ -161,15 +163,16 @@ num_t nro_caminos(grafo G, char a, char b, num_t n) {
     } else {
         int res[G->cant_vertices];
         int copia[G->cant_vertices];
-        /* for(int i = 0; i < G->cant_vertices; i++)
+        for(int i = 0; i < G->cant_vertices; i++)
             copia[i] = G->info[valor_b][i];
         for(int x = 0; x < G->cant_vertices; x++)
             for(int y = 0; y < G->cant_vertices; y++)
-                res[i] = vector[i]*/
+                res[i] = vector[i]
         // TODO:
     }
     return devolucion;
 }
+*/
 
 // Devuelve true si v es vertice de G, false en caso contrario
 bool es_vertice(grafo G, char v) { return valor_en_tabla(v, G->etiquetas) >= 0; }
@@ -244,7 +247,7 @@ bool es_conexo(grafo G) {
         }
         liberar_cola(c);
         // REVISAR:
-        delete visita[];
+        // delete visita[];
         res = cont == G->cant_vertices;
     }
     return res;
@@ -280,7 +283,7 @@ num_t componentes_conexas(grafo G) {
         }
         liberar_cola(c);
         // REVISAR:
-        delete visita[];
+        // delete visita[];
     }
     return comp;
 }
@@ -306,9 +309,11 @@ bool es_plano(grafo G) {
 }
 
 // Devuelve true si G es aciclico, false en caso contrario
+/*
 bool es_aciclico(grafo G) {
     // TODO:
 }
+*/
 
 // Devuelve true si G es arbol, false en caso contrario
 bool es_arbol(grafo G) {
@@ -364,14 +369,18 @@ bool existe_circ_euleriano(grafo G) {
 }
 
 // Devuelve true si el G tiene un camino hamiltoniano, false en caso contrario
+/*
 bool existe_cam_hamiltoniano(grafo G) {
 
 }
+*/
 
 // Devuelve true si el G tiene un ciclo hamiltoniano, false en caso contrario
+/*
 bool existe_cic_hamiltoniano(grafo G) {
     
 }
+*/
 
 // COLORACION
 // Si G es plano, se puede colorear con 4 colores
