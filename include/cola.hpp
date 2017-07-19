@@ -6,11 +6,11 @@ typedef rep_cola *cola;
 
 /* Constructoras */
 
-/*  Devuelve una cola_binarios vacía (sin elementos). */
-cola crear_cola_binarios();
+/*  Devuelve una cola vacía (sin elementos). */
+cola crear_cola();
 
-/* Encola `b' en `c'. */
-void encolar(vertice a, cola &c);
+/* Encola `a' en `c'. */
+void encolar(int a, cola &c);
 
 /* Destructoras */
 
@@ -35,6 +35,6 @@ bool es_vacia_cola(cola c);
   Devuelve el elemento que está en el frente de `c'.
   Precondición: ! es_vacia_cola(c);
  */
-vertice frente(cola c);
+int frente(cola c);
 
 #endif
