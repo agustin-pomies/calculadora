@@ -9,11 +9,7 @@
 bool esta_lleno_grafo(grafo G);
 grafo copiar_grafo(grafo G);
 grafo complementario(grafo G);
-bool es_conexo(grafo G);
-num_t componentes_conexas(grafo G);
 bool es_arbol(grafo G);
-bool existe_rec_euleriano(grafo G);
-bool existe_circ_euleriano(grafo G);
 */
 
 const char et1 = 'A';
@@ -199,7 +195,6 @@ int main() {
         printf("El grafo ES CONEXO.\n");
     else
         printf("El grafo NO ES CONEXO.\n");
-    // NOTA: HASTA ACA LA SALIDA ESTA BIEN
     printf("El grafo tiene %d componentes conexas. \n", componentes_conexas(K4));    
     if(existe_rec_euleriano(K4))
         printf("El grafo TIENE RECORRIDO EULERIANO.\n");
@@ -234,6 +229,7 @@ int main() {
 
     eliminar_grafo(K4);
     printf("\n");
+    // NOTA: HASTA ACA LA SALIDA ESTA BIEN
 /*
     // GRAFO K5
     printf("PRUEBA CON K5\n");    

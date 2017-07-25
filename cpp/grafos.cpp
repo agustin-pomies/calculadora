@@ -230,7 +230,7 @@ bool es_conexo(grafo G) {
         cola c = crear_cola();
         int cont, indice;
         encolar(0, c);
-        cont = 0;
+        cont = 1;
         visita[0] = true;
         for(int i = 1; i < G->cant_vertices; i++)
             visita[i] = false;
@@ -238,11 +238,11 @@ bool es_conexo(grafo G) {
         while(!es_vacia_cola(c)) {
             indice = frente(c);
             desencolar(c);
-            cont++;
             for(int j = 0; j < G->cant_vertices; j++)
                 if(G->info[indice][j] && !visita[j]) {
                     encolar(j, c);
                     visita[j] = true;
+                    cont++;
                 };
         }
         liberar_cola(c);
@@ -269,14 +269,16 @@ num_t componentes_conexas(grafo G) {
             while(visita[n])
                 n++;
             encolar(n, c);
+            visita[n] = true;
+            cont++;
             while(!es_vacia_cola(c)) {
                 indice = frente(c);
                 desencolar(c);
-                cont++;
                 for(int j = 0; j < G->cant_vertices; j++)
                     if(G->info[indice][j] && !visita[j]) {
                         encolar(j, c);
                         visita[j] = true;
+                        cont++;
                     };
             }
             comp++;
@@ -291,8 +293,10 @@ num_t componentes_conexas(grafo G) {
 // Devuelve true si G es plano, false en caso contrario
 bool es_plano(grafo G) {
     bool res;
+    
     // Esta condicion se debe cumplir si n>=3
-    res = G->cant_aristas <= 3*G->cant_vertices - 6;
+    if(G->cant_vertices >= 3)
+        res = G->cant_aristas <= 3*G->cant_vertices - 6;
 
     // Si n > 3 y no existen ciclos de longitud 3
     // G->cant_aristas < 2*G->cant_vertices - 4;
