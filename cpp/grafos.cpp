@@ -384,3 +384,10 @@ bool existe_cic_hamiltoniano(grafo G) {
 
 // COLORACION
 // Si G es plano, se puede colorear con 4 colores
+
+void eliminar_grafo(grafo G) {
+    liberar_tabla(G->etiquetas);
+    // TODO:
+    // borrar arreglo
+    delete G;
+}

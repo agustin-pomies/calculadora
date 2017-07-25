@@ -138,4 +138,7 @@ bool existe_circ_euleriano(grafo G);
 
 // COLORACION
 
+// Elimina la memoria asignada al grafo G
+void eliminar_grafo(grafo G);
+
 #endif
