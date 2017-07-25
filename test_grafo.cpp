@@ -11,13 +11,9 @@ grafo copiar_grafo(grafo G);
 grafo complementario(grafo G);
 bool es_conexo(grafo G);
 num_t componentes_conexas(grafo G);
-bool es_plano(grafo G);
-bool es_aciclico(grafo G);
 bool es_arbol(grafo G);
 bool existe_rec_euleriano(grafo G);
 bool existe_circ_euleriano(grafo G);
-bool existe_cam_hamiltoniano(grafo G);
-bool existe_cic_hamiltoniano(grafo G);
 */
 
 const char et1 = 'A';
@@ -32,7 +28,7 @@ const char et9 = 'I';
 const char et10 = 'J';
 
 int main() {
-    // Grafo Vacio
+    // GRAFO VACIO
     printf("PRUEBA CON GRAFO VACIO\n");
     grafo vacio = crear_grafo();
     if(es_grafo_vacio(vacio))
@@ -44,11 +40,10 @@ int main() {
         printf("El grafo TIENE el vertice %c.\n", et1);
     else
         printf("El grafo NO TIENE el vertice %c.\n", et1);
-    // NOTA: no despliega esta instruccion
-    // eliminar_grafo
+    eliminar_grafo(vacio);
     printf("\n");
     
-    // Grafo K1
+    // GRAFO K1
     printf("PRUEBA CON K1\n");
     grafo K1 = crear_grafo();
     agregar_vertice(K1, et1);
@@ -73,11 +68,10 @@ int main() {
         printf("El grafo ES COMPLETO.\n");
     else
         printf("El grafo NO ES COMPLETO.\n");
-    // eliminar grafo
-    // NOTA: recien aca despliega todo
+    eliminar_grafo(K1);
     printf("\n");
 
-    // Grafo K2
+    // GRAFO K2
     printf("PRUEBA CON K2\n");
     grafo K2 = crear_grafo();
     agregar_vertice(K2, et1);
@@ -95,6 +89,7 @@ int main() {
     else
         printf("El grafo NO ES COMPLETO.\n");
     
+    // luego de agregar la arista
     agregar_arista(K2, et1, et2);
     dist = distancia(K2, et1, et2);
     printf("El grado del vertice %c es %d. \n", et1, grado(K2, et1));
@@ -109,6 +104,7 @@ int main() {
     else
         printf("El grafo NO ES COMPLETO.\n");
     
+    // luego de quitar la arista
     remover_arista(K2, et1, et2);
     dist = distancia(K2, et1, et2);
     printf("El grado del vertice %c es %d. \n", et1, grado(K2, et1));
@@ -122,17 +118,198 @@ int main() {
         printf("El grafo ES COMPLETO.\n");
     else
         printf("El grafo NO ES COMPLETO.\n");
-    // eliminar_grafo
+    if(es_arbol(K2))
+        printf("El grafo ES ARBOL.\n");
+    else
+        printf("El grafo NO ES ARBOL.\n");
+    eliminar_grafo(K2);
     printf("\n");
 
-/*
+    // GRAFO K3
     printf("PRUEBA CON K3\n");
     grafo K3 = crear_grafo();
+    // agregar 3 vertices
+    agregar_vertice(K3, et1);
+    agregar_vertice(K3, et2);
+    agregar_vertice(K3, et3);
+    // agregar 2 aristas
+    agregar_arista(K3, et1, et2);
+    agregar_arista(K3, et1, et3);
 
+    if(es_arbol(K3))
+        printf("El grafo ES ARBOL.\n");
+    else
+        printf("El grafo NO ES ARBOL.\n");
+    if(existe_rec_euleriano(K3))
+        printf("El grafo TIENE RECORRIDO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE RECORRIDO EULERIANO.\n");
+    if(existe_circ_euleriano(K3))
+        printf("El grafo TIENE CIRCUITO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+
+    // agregar la ultima arista
+    agregar_arista(K3, et3, et2);
+
+    if(es_arbol(K3))
+        printf("El grafo ES ARBOL.\n");
+    else
+        printf("El grafo NO ES ARBOL.\n");
+    if(existe_rec_euleriano(K3))
+        printf("El grafo TIENE RECORRIDO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE RECORRIDO EULERIANO.\n");
+    if(existe_circ_euleriano(K3))
+        printf("El grafo TIENE CIRCUITO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+
+    eliminar_grafo(K3);
+    printf("\n");
+
+    // GRAFO K4
+    printf("PRUEBA CON K4\n");
     grafo K4 = crear_grafo();
-    grafo K5 = crear_grafo();
+    // agregar 4 vertices
+    agregar_vertice(K4, et1);
+    agregar_vertice(K4, et2);
+    agregar_vertice(K4, et3);
+    agregar_vertice(K4, et4);
+
+    if(es_conexo(K4))
+        printf("El grafo ES CONEXO.\n");
+    else
+        printf("El grafo NO ES CONEXO.\n");
+    printf("El grafo tiene %d componentes conexas. \n", componentes_conexas(K4));
+    if(existe_rec_euleriano(K4))
+        printf("El grafo TIENE RECORRIDO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE RECORRIDO EULERIANO.\n");
+    if(existe_circ_euleriano(K4))
+        printf("El grafo TIENE CIRCUITO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+
+    // agregar 2 atistas
+    agregar_arista(K4, et1, et2);
+    agregar_arista(K4, et3, et4);    
+
+    if(es_conexo(K4))
+        printf("El grafo ES CONEXO.\n");
+    else
+        printf("El grafo NO ES CONEXO.\n");
+    // NOTA: HASTA ACA LA SALIDA ESTA BIEN
+    printf("El grafo tiene %d componentes conexas. \n", componentes_conexas(K4));    
+    if(existe_rec_euleriano(K4))
+        printf("El grafo TIENE RECORRIDO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE RECORRIDO EULERIANO.\n");
+    if(existe_circ_euleriano(K4))
+        printf("El grafo TIENE CIRCUITO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+
+    // agregar el resto de las aristas (repitiendo una)
+    agregar_arista(K4, et1, et3);
+    agregar_arista(K4, et1, et4);
+    // repite esta
+    agregar_arista(K4, et2, et1);
+    agregar_arista(K4, et2, et3);
+    agregar_arista(K4, et2, et4);    
+    
+    if(es_conexo(K4))
+        printf("El grafo ES CONEXO.\n");
+    else
+        printf("El grafo NO ES CONEXO.\n");
+    printf("El grafo tiene %d componentes conexas. \n", componentes_conexas(K4));
+    if(existe_rec_euleriano(K4))
+        printf("El grafo TIENE RECORRIDO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE RECORRIDO EULERIANO.\n");
+    if(existe_circ_euleriano(K4))
+        printf("El grafo TIENE CIRCUITO EULERIANO.\n");
+    else
+        printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+
+    eliminar_grafo(K4);
+    printf("\n");
+/*
+    // GRAFO K5
+    printf("PRUEBA CON K5\n");    
+    grafo v5 = crear_grafo();
+    // agregar 5 vertices
+    agregar_vertice(v5, et1);
+    agregar_vertice(v5, et2);
+    agregar_vertice(v5, et3);
+    agregar_vertice(v5, et4);
+    agregar_vertice(v5, et5);
+    // prueba de agregar uno ya existente
+    agregar_vertice(v5, et1);
+
+    eliminar_grafo(v5);
+
+    // usar el complementario
+    grafo K5 = complementario(v5);
+
+    eliminar_grafo(K5);
+    
+    // GRAFO K3,3
+    printf("PRUEBA CON K3,3\n");
+    // grupo A = impares = {1, 3, 5}
+    // grupo B = pares = {2, 4, 6}
     grafo K33 = crear_grafo();
+    // agregar 6 vertices
+    agregar_vertice(K33, et1);
+    agregar_vertice(K33, et2);
+    agregar_vertice(K33, et3);
+    agregar_vertice(K33, et4);
+    agregar_vertice(K33, et5);
+    agregar_vertice(K33, et6);
+    // aristas desde et1
+    agregar_arista(K33, et1, et2);
+    agregar_arista(K33, et1, et4);
+    agregar_arista(K33, et1, et6);
+    // aristas desde et2
+    agregar_arista(K33, et2, et1);
+    agregar_arista(K33, et2, et3);
+    agregar_arista(K33, et2, et5);
+    // aristas desde et3
+    agregar_arista(K33, et3, et2);
+    agregar_arista(K33, et3, et4);
+    agregar_arista(K33, et3, et6);
+    // aristas desde et4
+    agregar_arista(K33, et4, et1);
+    agregar_arista(K33, et4, et3);
+    agregar_arista(K33, et4, et5);
+    // aristas desde et5
+    agregar_arista(K33, et5, et2);
+    agregar_arista(K33, et5, et4);
+    agregar_arista(K33, et5, et6);
+    // aristas desde et6
+    agregar_arista(K33, et6, et1);
+    agregar_arista(K33, et6, et3);
+    agregar_arista(K33, et6, et5);
+
+    eliminar_grafo(K33);  
+
+    // GRAFO DE PETERSEN
     grafo Petersen = crear_grafo();
+    // agregar 10 vertices
+    agregar_vertice(Petersen, et1);
+    agregar_vertice(Petersen, et2);
+    agregar_vertice(Petersen, et3);
+    agregar_vertice(Petersen, et4);
+    agregar_vertice(Petersen, et5);
+    agregar_vertice(Petersen, et6);
+    agregar_vertice(Petersen, et7);
+    agregar_vertice(Petersen, et8);
+    agregar_vertice(Petersen, et9);
+    agregar_vertice(Petersen, et10);
+
+    eliminar_grafo(Petersen);
+*/
+/*
     grafo C4 = crear_grafo();
     grafo P6 = crear_grafo();
 */
