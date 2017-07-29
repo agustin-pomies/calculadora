@@ -1,0 +1,51 @@
+PRUEBA CON GRAFO VACIO
+El grafo es vacio.
+El grafo NO TIENE el vertice A.
+
+PRUEBA CON K1
+El grafo es NO vacio.
+El vertice fue agregado.
+El grafo TIENE el vertice A. 
+El grafo NO TIENE el vertice B. 
+El grafo ES COMPLETO.
+
+PRUEBA CON K2
+El grado del vertice A es 0. 
+El grado del vertice B es 0. 
+La distancia entre el vertice A y B es -1. 
+Los vertices NO son adyacentes.
+El grafo NO ES COMPLETO.
+El grado del vertice A es 1. 
+El grado del vertice B es 1. 
+Los vertices son adyacentes. 
+La distancia entre el vertice A y B es 1. 
+El grafo ES COMPLETO.
+El grado del vertice A es 0. 
+El grado del vertice B es 0. 
+La distancia entre el vertice A y B es -1. 
+Los vertices NO son adyacentes.
+El grafo NO ES COMPLETO.
+El grafo NO ES ARBOL.
+
+PRUEBA CON K3
+El grafo ES ARBOL.
+El grafo TIENE RECORRIDO EULERIANO.
+El grafo NO TIENE CIRCUITO EULERIANO.
+El grafo NO ES ARBOL.
+El grafo NO TIENE RECORRIDO EULERIANO.
+El grafo TIENE CIRCUITO EULERIANO.
+
+PRUEBA CON K4
+El grafo NO ES CONEXO.
+El grafo tiene 4 componentes conexas. 
+El grafo NO TIENE RECORRIDO EULERIANO.
+El grafo NO TIENE CIRCUITO EULERIANO.
+El grafo NO ES CONEXO.
+El grafo tiene 2 componentes conexas. 
+El grafo NO TIENE RECORRIDO EULERIANO.
+El grafo NO TIENE CIRCUITO EULERIANO.
+El grafo ES CONEXO.
+El grafo tiene 1 componentes conexas. 
+El grafo NO TIENE RECORRIDO EULERIANO.
+El grafo NO TIENE CIRCUITO EULERIANO.
+

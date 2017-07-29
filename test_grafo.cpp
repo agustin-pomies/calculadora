@@ -9,7 +9,6 @@
 bool esta_lleno_grafo(grafo G);
 grafo copiar_grafo(grafo G);
 grafo complementario(grafo G);
-bool es_arbol(grafo G);
 */
 
 const char et1 = 'A';

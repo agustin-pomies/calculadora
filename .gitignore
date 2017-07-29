@@ -1,5 +1,6 @@
 # Linux executables
 *
+!makefile
 !/**/
 !*.*
 
@@ -37,3 +38,7 @@
 
 #DIR
 .vscode/
+
+# Testing files
+*.sal
+*.diff
