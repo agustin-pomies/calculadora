@@ -2,7 +2,7 @@
 all: principal
 
 # Objetivos que no son archivos.
-.PHONY: all testing clean_bin clean_test clean
+.PHONY: all run testing clean_bin clean_test clean
 
 # directorios
 HDIR = include
@@ -60,6 +60,9 @@ $(TESTDIR)/test_grafo.sal:test_grafo
 # el estado de la salida no es 0 y en ese caso se imprime el mensaje.   
 
 testing:$(TESTDIR)/test_grafo.diff
+
+run: $(EJECUTABLE)
+	./main
 
 # borra binarios
 clean_bin:
