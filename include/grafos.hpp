@@ -111,11 +111,11 @@ num_t componentes_conexas(grafo G);
 bool es_plano(grafo G);
 
 // Devuelve true si G es aciclico, false en caso contrario
-// Tiempo de Ejecucion: 
-// bool es_aciclico(grafo G);
+// Tiempo de Ejecucion: O(V^2) en el peor caso
+bool es_aciclico(grafo G);
 
 // Devuelve true si G es arbol, false en caso contrario
-// Tiempo de Ejecucion: 
+// Tiempo de Ejecucion: O(V^2) en el peor caso
 bool es_arbol(grafo G);
 
 // Devuelve true si el G tiene un recorrido euleriano, false en caso contrario

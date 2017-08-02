@@ -1,7 +1,7 @@
 #include "../include/grafos.hpp"
 #include "../include/tabla.hpp"
 #include "../include/cola.hpp"
-
+#include <stdio.h>
 // GRAFOS
 // Metodo para ingresar grafos:
 //      & Ingresando el nro de vertices y las aristas del grafo
@@ -87,6 +87,27 @@ void remover_arista(grafo &G, char a, char b) {
     }
 }
 
+// TODO:
+grafo leer_matriz() {
+    grafo G = crear_grafo();
+    //
+    return G;
+}
+
+// TODO:
+grafo leer_lista() {
+    grafo G = crear_grafo();
+    //
+    return G;
+}
+
+// TODO:
+grafo leer_aristas() {
+    grafo G = crear_grafo();
+    //
+    return G;
+}
+
 // Devuelve el nro de vertices de G
 num_t nro_vertices(grafo G) { return G->cant_vertices; }
 
@@ -151,6 +172,7 @@ num_t diametro(grafo G) {
 }
 */
 
+// NOTA: Diagonalizacion de matrices puede ayudar capaz
 // Devuelve el nro de caminos de largo n que comienzan en a y terminan en b
 // Precondicion: n > 0, es_vertice(a), es_vertice(b)
 /*
@@ -313,19 +335,60 @@ bool es_plano(grafo G) {
 }
 
 // Devuelve true si G es aciclico, false en caso contrario
-/*
 bool es_aciclico(grafo G) {
-    // TODO:
+    bool cond = true;
+    if(!es_grafo_vacio(G)) {
+        int visitas[G->cant_vertices];
+        int predecesor[G->cant_vertices];
+        cola c = crear_cola();
+        int cont, indice, n, j;
+        cont = 0;
+        n = 0;
+        for(int i = 0; i < G->cant_vertices; i++)
+            visitas[i] = 0;
+        for(int i = 0; i < G->cant_vertices; i++)
+            predecesor[i] = -2;
+
+        while(cont != G->cant_vertices && cond) {
+            while(visitas[n] != 0)
+                n++;
+            encolar(n,c);
+            visitas[n] = 1;
+            predecesor[n] = -1;
+            cont++;
+            while(!es_vacia_cola(c) && cond) {
+                indice = frente(c);
+                desencolar(c);
+                j = 0;
+                while(j < G->cant_vertices && cond) {
+                    if(G->info[indice][j] && j != predecesor[indice]) {
+                        if(predecesor[j] == -2) {
+                            encolar(j, c);
+                            predecesor[j] = indice;
+                            visitas[j]++;
+                            cont++;
+                        } else
+                            cond = false;
+                    };
+                    j++;
+                }
+            }
+        }
+        liberar_cola(c);
+        // REVISAR:
+        // delete visitas[];
+        // delete predecesor[];
+    }
+    return cond;
 }
-*/
 
 // Devuelve true si G es arbol, false en caso contrario
 bool es_arbol(grafo G) {
     bool res;
     res = G->cant_vertices == G->cant_aristas + 1;
-    // NOTA: eligo el que tenga mejor tiempo de ejecucion
-    res = res & es_conexo(G); // orden V^2 en el peor caso
-    // res = res & es_aciclico(G);
+    if(res)
+        res = res & es_conexo(G);
+        // res = res & es_aciclico(G);
     return res;
 }
 

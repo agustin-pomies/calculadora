@@ -131,6 +131,10 @@ int main() {
     agregar_arista(K3, et1, et2);
     agregar_arista(K3, et1, et3);
 
+    if(es_aciclico(K3))
+        printf("El grafo ES ACICLICO.\n");
+    else
+        printf("El grafo NO ES ACICLICO.\n");
     if(es_arbol(K3))
         printf("El grafo ES ARBOL.\n");
     else
@@ -147,6 +151,10 @@ int main() {
     // agregar la ultima arista
     agregar_arista(K3, et3, et2);
 
+    if(es_aciclico(K3))
+        printf("El grafo ES ACICLICO.\n");
+    else
+        printf("El grafo NO ES ACICLICO.\n");
     if(es_arbol(K3))
         printf("El grafo ES ARBOL.\n");
     else
@@ -185,6 +193,10 @@ int main() {
         printf("El grafo TIENE CIRCUITO EULERIANO.\n");
     else
         printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+    if(es_aciclico(K3))
+        printf("El grafo ES ACICLICO.\n");
+    else
+        printf("El grafo NO ES ACICLICO.\n");
 
     // agregar 2 atistas
     agregar_arista(K4, et1, et2);
@@ -203,6 +215,10 @@ int main() {
         printf("El grafo TIENE CIRCUITO EULERIANO.\n");
     else
         printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+    if(es_aciclico(K3))
+        printf("El grafo ES ACICLICO.\n");
+    else
+        printf("El grafo NO ES ACICLICO.\n");
 
     // agregar el resto de las aristas (repitiendo una)
     agregar_arista(K4, et1, et3);
@@ -225,6 +241,10 @@ int main() {
         printf("El grafo TIENE CIRCUITO EULERIANO.\n");
     else
         printf("El grafo NO TIENE CIRCUITO EULERIANO.\n");
+    if(es_aciclico(K3))
+        printf("El grafo ES ACICLICO.\n");
+    else
+        printf("El grafo NO ES ACICLICO.\n");
 
     eliminar_grafo(K4);
     printf("\n");
